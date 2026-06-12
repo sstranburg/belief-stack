@@ -110,7 +110,7 @@ A maintained read on what the market currently believes about a company, separat
 A maintained read on what's actually going on across a team's chatter, instead of re-reading every thread.
 - **L0** chat / meeting / ticket messages → **L1** theme clusters (vendor renewal, staffing pressure, compliance findings…) → **L2** belief: `customer_escalation :: this account's issue is escalating` (state: escalated / resolved / stalled) → **L3** escalating → resolved → reopened.
 
-**Temporal knowledge graphs** — *mapping in [`docs/belief_stack_fit_assessment_kg.md`](docs/belief_stack_fit_assessment_kg.md)*
+**Temporal knowledge graphs** — *one example mapping in the [fit guide](docs/belief_stack_fit_assessment.md)*
 A layer of *what the graph currently implies*, sitting above the stored facts.
 - **L0** ingestion events, documents, tool outputs → **L1** the graph itself (entities, relations, timestamps) → **L2** belief: `supplier_relationship :: X currently supplies Y` / `role_change :: this entity's role is shifting` / a relation flagged `contradicted` by recent evidence → **L3** relation lifecycle → **L4** did the belief layer improve retrieval / ranking / downstream reasoning vs querying the raw graph. *(If consumers only need stored facts, the graph alone is enough — this layer earns its keep only when the implications are revisable.)*
 
@@ -128,7 +128,7 @@ The common thread — and the disqualifier from above — is the same: these are
 |---|---|
 | **Try the mechanism** | [`examples/thesis_radar/`](examples/thesis_radar/) — run it, read the HTML report |
 | **Read the library** | [`beliefstack/`](beliefstack/) — ~1,500 lines, one module per layer |
-| **Check fit for your own domain** | [`docs/belief_stack_fit_assessment_kg.md`](docs/belief_stack_fit_assessment_kg.md) |
+| **Check fit for your own domain** | [`docs/belief_stack_fit_assessment.md`](docs/belief_stack_fit_assessment.md) |
 | **See the evidence** | [`experiments/`](experiments/) — each has a pre-registration + report |
 | **Read the paper** | [`paper/`](paper/) |
 
