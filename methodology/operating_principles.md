@@ -31,7 +31,7 @@ When a measured result conflicts with the intuition that motivated it, the resul
 Critiques fall into classes (matter / generality / mechanism / cost). Classify first; engage second. Matter-critiques would be regression; generality-critiques are progress.
 
 **Backlog is canonical.**
-Work that matters lives in `/ops/backlog.md`. If it is not in the backlog, it is not queued — it is an idea in someone's head, and ideas in heads are not project state.
+Work that matters is written down, not held in someone's head — if it is not queued in a canonical place, it is not project state. The public research directions live in [`ROADMAP.md`](../ROADMAP.md); the working repo keeps the operational backlog.
 
 **Decisions require trace.**
 Every architectural decision carries its reason and its reversibility. Cheap-to-reverse decisions get made fast; hard-to-reverse decisions get an audit trail.
@@ -41,7 +41,7 @@ Every architectural decision carries its reason and its reversibility. Cheap-to-
 ## Where to go next
 
 - **Substance of the work** — [topicspace.ai/research/belief-stack](https://topicspace.ai/research/belief-stack). The Belief Stack spec, with the v0.3 result and the post-v0.3 vocabulary.
-- **Current priorities** — `/ops/backlog.md`.
+- **Open research questions and planned work** — [`ROADMAP.md`](../ROADMAP.md).
 - **Examples of the rhythm in action** — any pre-registration (e.g., [`experiments/belief_stack_v0_3/BELIEF_STACK_PRE_REGISTRATION_v0.3.md`](../experiments/belief_stack_v0_3/BELIEF_STACK_PRE_REGISTRATION_v0.3.md)) paired with its report. The discipline is visible in the artifact pair, not just the result.
 - **The AI substrate** (cold-start orientation for Claude / other agents) — `CLAUDE.md`, the AI-facing cold-start file kept in the private research repo.
 

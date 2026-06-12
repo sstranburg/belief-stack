@@ -4,6 +4,8 @@
 
 > Agents shouldn't have to reconstruct the current state of the world from raw history every time they plan.
 
+**Full specification:** [topicspace.ai/research/belief-stack](https://topicspace.ai/research/belief-stack) — the canonical architecture and vocabulary. This README is the practical overview; the spec is the authoritative reference.
+
 ---
 
 ## The problem
@@ -130,7 +132,9 @@ The common thread — and the disqualifier from above — is the same: these are
 | **Read the library** | [`beliefstack/`](beliefstack/) — ~1,500 lines, one module per layer |
 | **Check fit for your own domain** | [`docs/belief_stack_fit_assessment.md`](docs/belief_stack_fit_assessment.md) |
 | **See the evidence** | [`experiments/`](experiments/) — each has a pre-registration + report |
+| **Read the full specification** | [topicspace.ai/research/belief-stack](https://topicspace.ai/research/belief-stack) — architecture + vocabulary |
 | **Read the paper** | [`paper/`](paper/) |
+| **See what's next / open questions** | [`ROADMAP.md`](ROADMAP.md) |
 
 ## Repository map
 
