@@ -1,5 +1,5 @@
 """
-Deals thesis-radar - multi-pass lifecycle demo.
+Thesis radar - multi-pass lifecycle demo.
 
 The single-pass demo (`run_demo.py`) proves the pipeline runs. This script
 shows the *belief revision* part: hypotheses change over time, and the
@@ -21,8 +21,8 @@ and emits a real transition: strengthened, weakened, contradicted, retired,
 or inverted.
 
 Run:
-    python examples/deals_thesis_radar/run_demo_multipass.py
-    open examples/deals_thesis_radar/outputs/region_cards_multipass.html
+    python examples/thesis_radar/run_demo_multipass.py
+    open examples/thesis_radar/outputs/region_cards_multipass.html
 """
 
 from __future__ import annotations
@@ -240,7 +240,7 @@ def main() -> None:
 
     # 9. Render
     out = render_region_cards_html(
-        title        = "Deals thesis-radar - multi-pass lifecycle (pass A -> pass B)",
+        title        = "Thesis radar - multi-pass lifecycle (pass A -> pass B)",
         generated_at = now.isoformat(timespec="seconds"),
         regions      = regions,
         hypotheses   = hyp_b,

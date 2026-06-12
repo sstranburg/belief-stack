@@ -39,7 +39,7 @@ def require_openai_key() -> str:
             "\n"
             "Set it and re-run, e.g.:\n"
             "    export OPENAI_API_KEY=sk-...\n"
-            "    python examples/synthetic_themes/run_demo.py\n"
+            "    python examples/teams_sensemaking/run_demo.py\n"
             "\n"
             "If you want the deterministic (mock-embedder + empirical-generator)\n"
             "path, see the library tests under tests/ — the demo deliberately\n"

@@ -20,7 +20,7 @@ Requires OPENAI_API_KEY in env. The demo fails fast if the key is missing.
 Run:
     export OPENAI_API_KEY=sk-...
     pip install -e ".[openai]"
-    python examples/synthetic_themes/run_demo.py
+    python examples/teams_sensemaking/run_demo.py
 """
 
 from __future__ import annotations

@@ -23,7 +23,7 @@ the demo reads from the cache and does not re-call the LLM.
 
 Re-run with:
     export OPENAI_API_KEY=sk-...
-    python examples/synthetic_themes/generate_synthetic_data.py
+    python examples/teams_sensemaking/generate_synthetic_data.py
 """
 
 from __future__ import annotations
@@ -65,7 +65,7 @@ THEMES = [
         ["resolved","resolved","stalled","resolved"],
         "Contract / renewal friction with an external vendor. Procurement, "
         "legal, finance, and engineering chatter about contract terms, "
-        "switching cost, alternative providers, deal closure.",
+        "switching cost, alternative providers, renewal decision.",
     ),
     (
         "platform_migration_concerns",

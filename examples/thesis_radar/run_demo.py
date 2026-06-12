@@ -1,10 +1,10 @@
 """
-Deals thesis-radar demo: end-to-end L0 -> L4 -> region cards.
+Thesis radar demo: end-to-end L0 -> L4 -> region cards.
 
 What this shows:
     L0 events (synthetic thesis snippets)
         -> L1 regions (clusters of similar thesis content)
-        -> L2 hypotheses (expected deal-activity outcome per region)
+        -> L2 hypotheses (expected evidence-strength outcome per region)
         -> L3 lifecycle (born; multi-pass extensions documented in README)
         -> L4 calibration (walk-forward against the held-out test slice)
         -> decisions (PROMOTE / MONITOR / RECLUSTER / RETIRE / ...)
@@ -12,7 +12,7 @@ What this shows:
 
 Run:
     pip install -e .
-    python examples/deals_thesis_radar/run_demo.py
+    python examples/thesis_radar/run_demo.py
 """
 
 from __future__ import annotations
@@ -151,7 +151,7 @@ def main() -> None:
 
     # 9. render the region-card report
     out = render_region_cards_html(
-        title        = "Deals thesis-radar - synthetic demo",
+        title        = "Thesis radar - synthetic demo",
         generated_at = now.isoformat(timespec="seconds"),
         regions      = regions,
         hypotheses   = hypotheses,

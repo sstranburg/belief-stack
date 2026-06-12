@@ -30,8 +30,8 @@ batched embedding call per run.
 
 Run:
     export OPENAI_API_KEY=sk-...
-    python examples/synthetic_themes/run_demo_multipass.py
-    open examples/synthetic_themes/outputs/region_cards_multipass.html
+    python examples/teams_sensemaking/run_demo_multipass.py
+    open examples/teams_sensemaking/outputs/region_cards_multipass.html
 """
 
 from __future__ import annotations

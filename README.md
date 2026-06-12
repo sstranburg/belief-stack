@@ -22,7 +22,7 @@ experiments/ = evidence     ·   paper/ = the claim
 | If you want… | Go to |
 |---|---|
 | **What is this?** — the claim + headline result | this README (below) |
-| **Try the mechanism** | [`examples/`](examples/) — [`deals_thesis_radar/`](examples/deals_thesis_radar/) or [`teams_sensemaking/`](examples/teams_sensemaking/) |
+| **Try the mechanism** | [`examples/`](examples/) — [`thesis_radar/`](examples/thesis_radar/) or [`teams_sensemaking/`](examples/teams_sensemaking/) |
 | **Test your own domain** | [`docs/belief_stack_fit_assessment_kg.md`](docs/belief_stack_fit_assessment_kg.md) |
 | **The evidence** | [`experiments/`](experiments/) |
 | **The paper** | [`paper/`](paper/) |
@@ -56,7 +56,7 @@ The first experiment (**v0.3**, `gpt-4o-2024-08-06`) showed an 8-point correctne
 | Path | What it is |
 |---|---|
 | [`beliefstack/`](beliefstack/) | **Core runnable library** — the mechanism. `events` (L0) · `regions` (L1) · `hypotheses` (L2) · `lifecycle` (L3) · `calibration` (L4) · `decisions` · `warrants` · `embeddings` · `reports`. |
-| [`examples/`](examples/) | **Use-case demos** — the front door for new domains. `deals_thesis_radar/` (thesis radar) and `teams_sensemaking/` (synthetic Teams chatter). Two domains exercising the same L2 `extras` abstraction. |
+| [`examples/`](examples/) | **Use-case demos** — the front door for new domains. `thesis_radar/` (thesis radar) and `teams_sensemaking/` (synthetic Teams chatter). Two domains exercising the same L2 `extras` abstraction. |
 | [`experiments/`](experiments/) | **The evidence ledger** — pre-registered experiments, each with a pre-registration, report, scripts, and notes. operational_belief_v1/v2 · belief_stack_v0_3 · stack_grounded_v1 · sensemaking_v1_5 (cross-substrate bridge) · tkos_log_replay. |
 | [`paper/`](paper/) | The manuscript-in-progress — *Reducing the Reconstruction Tax in Long-Running LLM Workflows*. Earlier drafts in `paper/drafts/`. |
 | [`tkos_sidecar/`](tkos_sidecar/) | TKOS write-path engineering — rules spec, integration pattern, read-path slice (`tkos.py`). |
