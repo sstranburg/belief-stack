@@ -263,7 +263,7 @@ In rough priority order, refined by what v0.4a's findings revealed:
 
 ## References and artifacts
 
-The full experimental artifacts — pre-registrations, executable code, generated data, and reports — live in the project repository at `github.com/sstranburg/topicspace-core`. Key references for replication:
+The full experimental artifacts — pre-registrations, executable code, generated data, and reports — live in the project repository at `github.com/sstranburg/belief-stack`. Key references for replication:
 
 - **v0.3 pre-registration:** `belief_stack_v0_3/BELIEF_STACK_PRE_REGISTRATION_v0.3.md`
 - **v0.3 report:** `belief_stack_v0_3/BELIEF_STACK_REPORT_v0.3.md`

@@ -94,3 +94,5 @@ Raw experiment data is **not shipped in full** — it derives from real Claude C
 ## Citation
 
 > Stranburg, S. (2026). *Reducing the Reconstruction Tax in Long-Running LLM Workflows: Maintained State as a Planning Primitive.* Working draft. https://topicspace.ai/research/belief-stack
+
+Code & data: https://github.com/sstranburg/belief-stack
