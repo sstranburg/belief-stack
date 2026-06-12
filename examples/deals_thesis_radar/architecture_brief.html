@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Belief Stack for Financial Reasoning Integrity — Architecture Brief</title>
+<style>
+  :root {
+    --bg:#f9f9f7; --surface:#fff; --surface2:#f2f2ef;
+    --border:#d0d0c8; --border2:#e4e4dc;
+    --text:#1a1a12; --text2:#38382c; --muted:#888878;
+    --accent:#1d4ed8; --amber:#a06000; --teal:#0f766e; --red:#b91c1c; --green:#15803d;
+  }
+  * { box-sizing:border-box; }
+  html,body { margin:0; padding:0; background:var(--bg); color:var(--text2);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+    font-size:16px; line-height:1.65; }
+  .container { max-width:1120px; margin:0 auto; padding:56px 36px 96px; }
+  header.report-head { border-bottom:1px solid var(--border); padding-bottom:28px; margin-bottom:36px; }
+  .eyebrow { font-family:ui-monospace,monospace; font-size:11px; font-weight:700;
+    letter-spacing:0.16em; text-transform:uppercase; color:var(--muted); margin-bottom:12px; }
+  h1 { font-size:30px; font-weight:700; color:var(--text); line-height:1.2; letter-spacing:-0.01em; margin:0 0 12px; }
+  .subtitle { font-size:17px; color:var(--text2); margin:0 0 18px; }
+  .status-pill { display:inline-block; font-family:ui-monospace,monospace; font-size:11px;
+    font-weight:700; letter-spacing:0.12em; text-transform:uppercase;
+    padding:4px 10px; border-radius:4px; margin:6px 0 14px;
+    background:#fffaf0; color:var(--amber); border:1px solid var(--amber); }
+  .meta { font-family:ui-monospace,monospace; font-size:12px; color:var(--muted); line-height:1.7; }
+
+  h2 { font-size:26px; font-weight:700; color:var(--text); margin:60px 0 14px;
+    letter-spacing:-0.01em; padding-top:32px; border-top:2px solid var(--text); position:relative; }
+  h2 .section-num { position:absolute; top:36px; left:-56px;
+    font-family:ui-monospace,monospace; font-size:11px; font-weight:700;
+    letter-spacing:0.16em; color:var(--muted); }
+  h3 { font-size:18px; font-weight:700; color:var(--text); margin:28px 0 10px; }
+  h4 { font-size:14px; font-weight:700; color:var(--text); margin:20px 0 8px; }
+
+  p { margin:0 0 16px; }
+  ul { margin:0 0 16px; padding-left:22px; }
+  ul li { margin-bottom:5px; }
+  ol { margin:0 0 16px; padding-left:22px; }
+  ol li { margin-bottom:5px; }
+  code { font-family:ui-monospace,monospace; font-size:13.5px; background:var(--surface2);
+    border-radius:3px; padding:1px 5px; color:var(--text); }
+  strong { color:var(--text); font-weight:700; }
+  em { color:var(--text); font-style:italic; }
+
+  .substrate { border:1px solid var(--border); background:var(--surface);
+    border-radius:8px; padding:28px 32px; margin:18px 0 30px; }
+  .layer-stack { display:grid; grid-template-columns:60px 1fr; gap:14px 16px; align-items:center; }
+  .layer-stack .layer-id { font-family:ui-monospace,monospace; font-weight:700; font-size:14px;
+    text-align:center; padding:6px 10px; border-radius:4px; color:#fff; }
+  .layer-stack .l0 { background:#65a30d; }
+  .layer-stack .l1 { background:var(--teal); }
+  .layer-stack .l2 { background:var(--accent); }
+  .layer-stack .l3 { background:var(--amber); }
+  .layer-stack .l4 { background:#6d28d9; }
+  .layer-stack .lgov { background:var(--red); }
+  .layer-stack .layer-name { font-weight:700; color:var(--text); }
+  .layer-stack .layer-desc { font-size:13.5px; color:var(--text2); }
+
+  .callout { border-left:3px solid var(--accent); background:#eff6ff;
+    padding:16px 20px; margin:18px 0 24px; border-radius:0 4px 4px 0; }
+  .callout .label { font-family:ui-monospace,monospace; font-size:10px; font-weight:700;
+    letter-spacing:0.16em; text-transform:uppercase; color:var(--accent); margin-bottom:8px; }
+  .callout p:last-child { margin-bottom:0; }
+  .callout.green { border-left-color:var(--green); background:#f0fdf4; }
+  .callout.green .label { color:var(--green); }
+  .callout.amber { border-left-color:var(--amber); background:#fffaf0; }
+  .callout.amber .label { color:var(--amber); }
+  .callout.red { border-left-color:var(--red); background:#fef2f2; }
+  .callout.red .label { color:var(--red); }
+  .callout.teal { border-left-color:var(--teal); background:#f0fdfa; }
+  .callout.teal .label { color:var(--teal); }
+
+  .toc { background:var(--surface); border:1px solid var(--border); border-radius:8px;
+    padding:20px 28px; margin:14px 0 32px; }
+  .toc h3 { margin:0 0 12px; font-size:13px; letter-spacing:0.14em;
+    text-transform:uppercase; color:var(--muted); font-family:ui-monospace,monospace; }
+  .toc ol { margin:0; padding-left:22px; }
+  .toc ol li { margin:6px 0; font-size:14.5px; color:var(--text2); }
+  .toc ol li a { color:var(--accent); text-decoration:none; font-weight:600; }
+  .toc ol li a:hover { text-decoration:underline; }
+
+  pre { background:var(--surface2); border:1px solid var(--border2); border-radius:4px;
+    padding:14px 16px; font-family:ui-monospace,monospace; font-size:13px;
+    overflow-x:auto; line-height:1.5; margin:12px 0 20px; }
+
+  table.simple { width:100%; border-collapse:collapse; font-size:14px; margin:14px 0 24px; }
+  table.simple th, table.simple td { padding:8px 12px; border-bottom:1px solid var(--border); text-align:left; vertical-align:top; }
+  table.simple th { font-family:ui-monospace,monospace; font-size:10px; font-weight:700;
+    letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); border-bottom:1px solid var(--border2); }
+
+  .region-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:10px; margin:14px 0 22px; }
+  .region-chip { background:var(--surface); border:1px solid var(--border2); border-radius:6px;
+    padding:10px 14px; font-family:ui-monospace,monospace; font-size:13px; font-weight:600; color:var(--text); }
+
+  footer { border-top:1px solid var(--border); margin-top:56px; padding-top:20px;
+    font-size:12px; color:var(--muted); font-family:ui-monospace,monospace; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="report-head">
+  <div class="eyebrow">Deals POC · Architecture Brief</div>
+  <h1>Belief Stack for financial reasoning integrity</h1>
+  <span class="status-pill">Status: Early-stage research</span>
+  <p class="subtitle">A proposed architecture for runtime integrity monitoring of multi-step LLM financial reasoning traces. The objective is detecting and intervening when reasoning departs from evidentiary integrity — not general-purpose AI governance, not a content classifier, not a replacement for human review.</p>
+  <div class="meta">
+    Domain: deals / accounting / valuation / reconciliation workflows.<br>
+    Architectural pattern: Belief Stack (L0 evidence → L1 operational regions → L2 priors → L3 lifecycle → L4 calibration → governance eligibility).<br>
+    Companion: <code>generate_synthetic_data.py</code>, <code>run_demo.py</code>, <code>run_demo_multipass.py</code> in this directory.
+  </div>
+</header>
+
+<div class="toc">
+  <h3>Contents</h3>
+  <ol>
+    <li><a href="#sec-problem">Problem definition</a></li>
+    <li><a href="#sec-core">Core concept — evidence substrate vs reasoning trace</a></li>
+    <li><a href="#sec-mapping">Belief Stack mapping (L0 → L4)</a></li>
+    <li><a href="#sec-contract">L1 representation contract (label + warrant, simultaneity, L0 cleaning)</a></li>
+    <li><a href="#sec-experiments">Initial experimental approach (5 phases, with intervention-class governance bars)</a></li>
+    <li><a href="#sec-hypothesis">Architectural hypothesis</a></li>
+    <li><a href="#sec-constraints">Constraints &amp; unknowns</a></li>
+    <li><a href="#sec-longterm">Long-term direction</a></li>
+  </ol>
+</div>
+
+<!-- =========================================================== -->
+<h2 id="sec-problem"><span class="section-num">SECTION 1</span>Problem definition</h2>
+
+<p>Modern LLM systems can execute sophisticated multi-step financial reasoning workflows — accounting normalization, transaction modeling, reconciliation, valuation calculations, debt and covenant logic, portfolio aggregation, waterfall structures, scenario analysis.</p>
+
+<p>These systems often produce outputs that <em>appear</em> coherent and authoritative while silently introducing:</p>
+
+<ul>
+  <li>unsupported assumptions</li>
+  <li>arithmetic drift</li>
+  <li>conditional-logic failures</li>
+  <li>source/evidence mismatches</li>
+  <li>sign inversions</li>
+  <li>cross-table mapping corruption</li>
+  <li>reconciliation inconsistencies</li>
+</ul>
+
+<p>Traditional evaluation methods assess <strong>final-answer correctness</strong>, point-in-time classifier outputs, or static policy violations. They generally do not model the step-by-step reasoning trajectory, evidence integrity across steps, runtime drift from source data, operational failure patterns, or intervention opportunities <em>during</em> execution.</p>
+
+<p>The proposed architecture treats the reasoning process itself as a dynamic execution trace that can be monitored, modeled, calibrated, and intervened upon.</p>
+
+<!-- =========================================================== -->
+<h2 id="sec-core"><span class="section-num">SECTION 2</span>Core concept — evidence substrate vs reasoning trace</h2>
+
+<p>The system operates on two primary artifacts:</p>
+
+<h3>A. Evidence substrate (L0)</h3>
+<p>Structured source data — JSON financial records, ledger entries, accounting tables, validation outputs, source mappings, transaction metadata, reconciliation rules, tie-out constraints. This layer is the authoritative evidence base. It is not interpreted; it is the raw evidence field.</p>
+
+<h3>B. Reasoning trace</h3>
+<p>The model-generated execution path — markdown reasoning traces, intermediate calculations, mapping decisions, formula applications, corrections, validation commentary, reconciliation steps, final conclusions. This layer represents the model's evolving reasoning process.</p>
+
+<div class="callout">
+  <div class="label">The central architectural objective</div>
+  <p>Detect when the reasoning trace departs from evidentiary integrity — and intervene <em>during</em> execution, before downstream corruption compounds.</p>
+</div>
+
+<!-- =========================================================== -->
+<h2 id="sec-mapping"><span class="section-num">SECTION 3</span>Belief Stack mapping (L0 → L4)</h2>
+
+<div class="substrate">
+<div style="font-family:ui-monospace,monospace;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;">Layers, applied to this substrate</div>
+<div class="layer-stack">
+  <span class="layer-id l0">L0</span><div><span class="layer-name">Evidence substrate</span> &nbsp; <span class="layer-desc">ground-truth operational data: source JSON, ledger values, accounting periods, reconciliation constraints, invariants</span></div>
+  <span class="layer-id l1">L1</span><div><span class="layer-name">Operational reasoning regions</span> &nbsp; <span class="layer-desc">typed computational operations (a priori typology, not learned clusters)</span></div>
+  <span class="layer-id l2">L2</span><div><span class="layer-name">Expectations, risk priors, interventions</span> &nbsp; <span class="layer-desc">per-region invariants, historical failure patterns, intervention strategies, escalation conditions</span></div>
+  <span class="layer-id l3">L3</span><div><span class="layer-name">Lifecycle &amp; trajectory</span> &nbsp; <span class="layer-desc">how reasoning evolves: drift onset, self-correction, propagation, reconciliation pressure, correction loops</span></div>
+  <span class="layer-id l4">L4</span><div><span class="layer-name">Calibration &amp; continuous evaluation</span> &nbsp; <span class="layer-desc">which interventions reduce failure rates; which regions are fragile; whether priors stay valid</span></div>
+  <span class="layer-id lgov">GOV</span><div><span class="layer-name">Earned governance eligibility</span> &nbsp; <span class="layer-desc">no intervention deploys without measurable improvement and demonstrated transferability</span></div>
+</div>
+</div>
+
+<h3>L1 — Operational reasoning regions (a priori typology)</h3>
+
+<p>L1 here is <strong>not learned from data via clustering</strong>. The regions are defined as typed computational operations because financial reasoning operations are inherently discrete and labelable.</p>
+
+<div class="region-grid">
+  <div class="region-chip">EVIDENCE_EXTRACTION</div>
+  <div class="region-chip">FORMULA_APPLICATION</div>
+  <div class="region-chip">SIGN_NORMALIZATION</div>
+  <div class="region-chip">CONDITIONAL_APPLICATION</div>
+  <div class="region-chip">RECONCILIATION</div>
+  <div class="region-chip">CROSS_TABLE_MAPPING</div>
+  <div class="region-chip">CLASSIFICATION</div>
+  <div class="region-chip">VALIDATION</div>
+  <div class="region-chip">ASSUMPTION_INTRODUCTION</div>
+  <div class="region-chip">CORRECTION</div>
+  <div class="region-chip">FINAL_RECOMMENDATION</div>
+</div>
+
+<p>The hypothesis: different reasoning operations exhibit distinct historical failure modes and therefore require distinct runtime safeguards. The a priori choice is justified by the domain — operations like FORMULA_APPLICATION or RECONCILIATION have hard, named invariants (operands resolve to evidence, totals tie out) that justify defining the regions ahead of time rather than discovering them.</p>
+
+<div class="callout amber">
+  <div class="label">Worth validating empirically</div>
+  <p>The eleven candidate regions are a starting typology. Phase 1 manual audit should confirm whether real traces partition cleanly into these operations, or whether the typology needs splitting, merging, or extension. If a substantial fraction of reasoning steps don't fit, the typology is wrong — and the discovery itself is signal.</p>
+</div>
+
+<h3>L2 — Expectations, risk priors, runtime interventions</h3>
+
+<p>For each operational region, the system learns expected invariants, historical failure patterns, intervention strategies, escalation conditions, and confidence expectations. Three worked examples:</p>
+
+<h4>FORMULA_APPLICATION</h4>
+<table class="simple">
+  <thead><tr><th>Expected invariants</th><th>Potential intervention</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>
+        — all operands must exist<br>
+        — operands resolve to evidence or prior derived values<br>
+        — arithmetic must validate
+      </td>
+      <td>
+        — emit explicit formula<br>
+        — bind operands to source references<br>
+        — recompute before continuing
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>CONDITIONAL_APPLICATION</h4>
+<table class="simple">
+  <thead><tr><th>Expected invariants</th><th>Potential intervention</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>
+        — branch condition must exist in evidence<br>
+        — condition scope must match query scope
+      </td>
+      <td>
+        — quote governing condition<br>
+        — explicitly evaluate condition state<br>
+        — prohibit unsupported branch execution
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>RECONCILIATION</h4>
+<table class="simple">
+  <thead><tr><th>Expected invariants</th><th>Potential intervention</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>
+        — totals must tie out<br>
+        — downstream balances remain consistent
+      </td>
+      <td>
+        — halt final recommendation if reconciliation fails<br>
+        — emit explicit escalation requirement
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>L3 — Lifecycle &amp; trajectory</h3>
+
+<p>L3 models how the reasoning process evolves over time: where drift begins, whether corrections self-heal downstream calculations, whether unsupported assumptions propagate, whether reconciliation pressure forces revision, whether repeated correction loops emerge.</p>
+
+<p>Candidate trajectory states:</p>
+<ul>
+  <li><strong>stable</strong> — operations passing invariants step-by-step</li>
+  <li><strong>drifting</strong> — invariants beginning to weaken</li>
+  <li><strong>unstable</strong> — multiple invariants failing in sequence</li>
+  <li><strong>corrected</strong> — a CORRECTION operation has resolved a prior failure</li>
+  <li><strong>unreconciled</strong> — a RECONCILIATION operation has failed</li>
+  <li><strong>escalated</strong> — runtime halt triggered; human review required</li>
+</ul>
+
+<p>The trajectory itself becomes an object of analysis — not just "did the final answer fail?" but "at which step did integrity break, and how did the trace respond?"</p>
+
+<div class="callout amber">
+  <div class="label">Trajectory state requires warrant composition, not label sequence</div>
+  <p>A sequence of three operation labels — say, <code>EVIDENCE_EXTRACTION → SIGN_NORMALIZATION → CONDITIONAL_APPLICATION</code> — is just three labels. It doesn't tell you whether the trace is stable, drifting, or corrected. The trajectory state emerges from <em>how the warrants compose</em>:</p>
+  <ul>
+    <li>Did each step's evidence_refs resolve cleanly into the next step's inputs? → <strong>stable</strong></li>
+    <li>Did a step introduce an operand whose evidence_ref doesn't validate? → <strong>drifting</strong></li>
+    <li>Did a downstream CORRECTION re-establish a clean warrant chain? → <strong>corrected</strong></li>
+    <li>Did a RECONCILIATION operation fail to balance dependent quantities? → <strong>unreconciled</strong></li>
+  </ul>
+  <p>L3 is not over the labels — it's over the warrant chain. That's why the L1 contract (label + warrant) is load-bearing for everything above it. Without warrants, L3 has no signal to compose; with warrants, the trajectory state falls out of warrant validity propagation step-by-step.</p>
+</div>
+
+<h3>L4 — Calibration &amp; continuous evaluation</h3>
+
+<p>L4 evaluates which interventions reduce failure rates, which operational regions are most fragile, which evidence structures correlate with drift, whether priors remain valid under changing workflows, and whether interventions still outperform baseline. This layer continuously pushes back against stale assumptions — including the typology choices in L1.</p>
+
+<!-- =========================================================== -->
+<h2 id="sec-contract"><span class="section-num">SECTION 4</span>L1 representation contract (label + warrant)</h2>
+
+<p>This brief inherits the same L1 representation contract used in the other Belief Stack applications: <strong>every L1 assignment must carry both a label and a warrant</strong>. In this domain, a reasoning step assigned to <code>FORMULA_APPLICATION</code> is not enough — the assignment must include the evidence supporting it.</p>
+
+<pre>{
+  "step_id": "s14",
+  "operation_type": "FORMULA_APPLICATION",
+  "warrant": {
+    "inputs":              ["EBITDA", "Revenue"],
+    "evidence_refs":       ["json.company.ebitda", "json.company.revenue"],
+    "validation_status":   "PASS",
+    "risk_flags":          ["derived_operand"],
+    "confidence":          0.84,
+    "downstream_deps":     ["valuation_step_19"]
+  }
+}</pre>
+
+<div class="callout">
+  <div class="label">Operating disciplines (inherited from the broader Belief Stack)</div>
+  <ol style="margin-top:6px;margin-bottom:0;">
+    <li>Do not use a learned (or a priori) structure unless its applicability is measured.</li>
+    <li>Do not emit priors outside coverage. If a reasoning step doesn't fit any operational region cleanly, return <code>UNCLASSIFIED</code> — don't force-assign.</li>
+    <li>Do not treat region assignment as truth. The label is a claim about what kind of operation this is; the warrant is the evidence supporting the claim.</li>
+  </ol>
+</div>
+
+<p>The third discipline is particularly load-bearing here. A reasoning step might syntactically look like a formula application but reference operands that don't exist in evidence — that's not a passing FORMULA_APPLICATION, it's an assignment with an empty warrant, which should be treated as a near-failure state, not as a normal operation.</p>
+
+<h3>Label and warrant must be emitted together</h3>
+
+<p>The hardest implementation question this raises: <em>at runtime, who assigns the operation_type to a raw line of reasoning text?</em></p>
+
+<p>One tempting answer is "a downstream text classifier inspects each step and labels it." This is a known failure mode: a post-hoc classifier with no warrant of its own emits confident labels for content it doesn't actually understand — markdown table boundaries, section dividers, or formatting wrappers can be confidently mislabeled as FORMULA_APPLICATION or RECONCILIATION when there's nothing operational happening in that span at all.</p>
+
+<p>The principle is not "structural emission instead of post-hoc classification." The principle is:</p>
+
+<div class="callout teal">
+  <div class="label">Simultaneity discipline</div>
+  <p><strong>Whoever assigns the operation_type must emit the warrant in the same act.</strong> Label without warrant is broken regardless of when it runs. Label with warrant (operand resolution, evidence_refs, validation_status) is fine, post-hoc or not — because the warrant either holds up against the evidence substrate or it doesn't.</p>
+</div>
+
+<p>Several mechanisms satisfy this discipline:</p>
+<ul>
+  <li><strong>FSM-constrained generation</strong> — force the model to declare its operation_type and emit its evidence_refs before printing any calculation</li>
+  <li><strong>Structured output schemas</strong> (JSON-mode, function-calling) — require the warrant fields to be filled before the call completes</li>
+  <li><strong>Post-hoc classifier with validation</strong> — fine if the classifier's verdict includes the warrant fields and the validation_status reflects whether the warrant actually verifies against evidence</li>
+</ul>
+
+<p>The failure mode to avoid: a classifier that emits a label but cannot supply a warrant — or worse, supplies a warrant that doesn't actually validate but is reported as PASS. A label without a verified warrant is not signal; it is confident noise.</p>
+
+<h3>L0 cleaning is a substrate-specific preprocessing discipline</h3>
+
+<p>Before any L1 assignment, the reasoning trace's container noise must be stripped from the substantive content. The traces are markdown — tables, headers, dividers, list markers (<code>|</code>, <code>---</code>, <code>##</code>, <code>↳</code>) need to be parsed away so the L1 step sees the propositional content and formulas, not the formatting characters. This is a preprocessing step that precedes everything else; the rest of the brief assumes the input has already been through it.</p>
+
+<!-- =========================================================== -->
+<h2 id="sec-experiments"><span class="section-num">SECTION 5</span>Initial experimental approach</h2>
+
+<h3>Phase 1 — Manual audit</h3>
+<p>Start with 5–10 traces. For each trace:</p>
+<ol>
+  <li>Segment markdown into discrete reasoning steps</li>
+  <li>Identify operation type for each step</li>
+  <li>Map referenced values back to JSON evidence</li>
+  <li>Validate arithmetic where applicable</li>
+  <li>Detect unsupported assumptions</li>
+  <li>Detect conditional-logic mismatches</li>
+  <li>Detect reconciliation failures</li>
+  <li>Identify where downstream corruption begins</li>
+</ol>
+<p><strong>Goal:</strong> understand the anatomy of reasoning failure <em>before</em> building generalized infrastructure.</p>
+
+<h3>Phase 2 — Reasoning ledger</h3>
+<p>Construct a normalized execution ledger using the schema above. <strong>Goal:</strong> create structured observability over reasoning behavior; turn each trace into an inspectable, replayable object.</p>
+
+<h3>Phase 3 — Failure pattern analysis</h3>
+<p>Analyze common operation-level failures, recurring correction patterns, reconciliation pressure points, unsupported-assumption propagation, drift signatures, high-risk operation sequences. <strong>Goal:</strong> discover which operational regions deserve runtime intervention — and which don't, because their failure rate is low or their failures don't propagate.</p>
+
+<h3>Phase 4 — Runtime intervention prototypes</h3>
+<p>Build candidate interventions for the highest-yield regions identified in Phase 3:</p>
+<ul>
+  <li><strong>Formula enforcement</strong> — emit explicit formula, bind operands to evidence, validate arithmetic before continuing</li>
+  <li><strong>Conditional enforcement</strong> — quote governing condition, evaluate condition state, prohibit unsupported branch execution</li>
+  <li><strong>Reconciliation enforcement</strong> — verify totals, verify downstream consistency, halt on unresolved mismatch</li>
+</ul>
+
+<h3>Phase 5 — Earned governance</h3>
+<p>Interventions are not deployed by declaration. Each must define a measurable target, demonstrate improvement vs baseline, prove transferability across traces, and remain calibration-aware over time.</p>
+
+<p>What "measurable improvement" means is <strong>not the same bar for every intervention</strong>. The substrate-aware principle that governed L1 also governs governance:</p>
+
+<table class="simple">
+  <thead><tr><th>Intervention class</th><th>Right bar</th><th>Why</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>Hard-invariant enforcement</strong><br>(formula, reconciliation, sign normalization)</td>
+      <td><span style="font-family:ui-monospace,monospace;color:var(--green);font-weight:700;">Binary certification</span><br>0% structural breakage across test fixtures</td>
+      <td>The invariant is deterministic. There is no statistical version of "the totals tied out 80% of the time." Tolerance is exactly zero.</td>
+    </tr>
+    <tr>
+      <td><strong>Soft-judgment enforcement</strong><br>(assumption flagging, evidence quality scoring, classification confidence)</td>
+      <td><span style="font-family:ui-monospace,monospace;color:var(--accent);font-weight:700;">Statistical lift</span><br>improvement vs baseline above noise threshold</td>
+      <td>The judgment is probabilistic. Some false positives are acceptable; the bar is whether the intervention shifts the rate enough to be worth the inference cost.</td>
+    </tr>
+    <tr>
+      <td><strong>Escalation / runtime consultation</strong></td>
+      <td><span style="font-family:ui-monospace,monospace;color:var(--amber);font-weight:700;">Two-sided cost-benefit</span><br>downstream error reduction net of review load</td>
+      <td>Escalation has a real cost (human review time). The bar isn't "does it catch errors" alone — it's "does it catch errors at an acceptable false-escalation rate."</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Same earned-governance discipline applies to every intervention type; the bar just looks different depending on what the intervention is trying to do.</p>
+
+<!-- =========================================================== -->
+<h2 id="sec-hypothesis"><span class="section-num">SECTION 6</span>Architectural hypothesis</h2>
+
+<div class="callout">
+  <div class="label">Central hypothesis</div>
+  <p>Multi-step financial reasoning systems fail in <strong>structured, repeatable operational patterns</strong>.</p>
+</div>
+
+<p>If the hypothesis holds:</p>
+<ul>
+  <li>Reasoning integrity can be modeled</li>
+  <li>Failure risk can be localized to specific operations</li>
+  <li>Interventions can be scoped to the operations that need them</li>
+  <li>Runtime behavior can be adaptively constrained</li>
+  <li>Escalation can be triggered before downstream corruption compounds</li>
+</ul>
+
+<p>The architecture does not attempt to model financial truth globally. It attempts to track <em>when reasoning departs from evidentiary integrity</em>. That is a much narrower, more tractable claim — and the right scope for a first deployment.</p>
+
+<!-- =========================================================== -->
+<h2 id="sec-constraints"><span class="section-num">SECTION 7</span>Constraints &amp; unknowns</h2>
+
+<p>This work is exploratory. Open questions include:</p>
+<ul>
+  <li>Whether operational regions remain stable across workflows (or whether each new workflow needs its own typology)</li>
+  <li>Whether interventions generalize across domains (deals vs accounting vs valuation vs portfolio aggregation)</li>
+  <li>Whether priors drift under changing models or prompts</li>
+  <li>How much structure is intrinsic to the operations vs corpus-specific</li>
+  <li>Whether lightweight runtime interventions outperform retraining approaches</li>
+  <li>Whether trajectory modeling materially improves downstream integrity, or whether per-step invariants are sufficient on their own</li>
+  <li>Whether the eleven a priori regions partition real traces cleanly, or whether the typology needs reshaping</li>
+</ul>
+
+<div class="callout red">
+  <div class="label">What this is — and is not</div>
+  <ul style="margin-top:8px;margin-bottom:0;">
+    <li>This is runtime integrity infrastructure research.</li>
+    <li>This is <em>not</em> a proven governance solution.</li>
+    <li>This is <em>not</em> a replacement for human review.</li>
+    <li>This is <em>not</em> a guarantee of correctness — it's a discipline for noticing when reasoning has departed from evidence.</li>
+  </ul>
+</div>
+
+<!-- =========================================================== -->
+<h2 id="sec-longterm"><span class="section-num">SECTION 8</span>Long-term direction</h2>
+
+<p>If the architecture proves useful in financial reasoning workflows, plausible extensions include:</p>
+<ul>
+  <li>Online calibration (priors that update as new traces accumulate)</li>
+  <li>Intervention lifecycle management (interventions earn / lose deployment eligibility over time)</li>
+  <li>Reasoning replay systems (rebuild a trace from its ledger to debug failure modes)</li>
+  <li>Invariant-aware execution protocols (operations refuse to run without their warrants)</li>
+  <li>Trajectory-aware escalation (halt patterns recognized from prior failures)</li>
+  <li>Adaptive runtime consultation layers (model asks for clarification when invariants are weak)</li>
+  <li>Cross-domain operational reasoning maps (transfer of operation typologies between deals / accounting / valuation)</li>
+</ul>
+
+<p>The initial focus, however, remains deliberately narrow:</p>
+
+<div class="callout green">
+  <div class="label">Scope for the first deployment</div>
+  <p>Improve integrity and observability in multi-step financial reasoning workflows. Detect when the reasoning trace departs from evidentiary integrity. Intervene where intervention is shown to help. Earn eligibility through measured improvement, not declaration.</p>
+</div>
+
+<footer>
+  Architecture brief — early-stage research. 2026-05-27.<br>
+  See companion code in this directory: <code>generate_synthetic_data.py</code>, <code>run_demo.py</code>, <code>run_demo_multipass.py</code>.
+</footer>
+
+</div>
+</body>
+</html>
