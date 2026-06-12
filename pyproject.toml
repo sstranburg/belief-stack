@@ -1,0 +1,40 @@
+[build-system]
+# setuptools >= 75 is required to avoid a Python 3.14 regression that skips
+# .pth files starting with `__` (which older setuptools versions use for
+# editable installs). See: https://github.com/pypa/setuptools/issues/4836
+requires      = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name            = "beliefstack"
+version         = "0.1.0"
+description     = "A minimal L0 -> L4 belief-revision library: regions, hypotheses, lifecycle, calibration."
+readme          = "README.md"
+requires-python = ">=3.10"
+license         = { text = "Apache-2.0" }
+authors         = [{ name = "Susan Stranburg" }]
+keywords        = ["calibration", "evaluation", "lifecycle", "regions", "belief-revision"]
+classifiers     = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python :: 3",
+  "Topic :: Scientific/Engineering",
+]
+dependencies = [
+  "numpy>=1.24",
+  "scikit-learn>=1.3",
+]
+
+[project.urls]
+Homepage   = "https://topicspace.ai/research/belief-stack"
+Repository = "https://github.com/sstranburg/belief-stack"
+
+[project.optional-dependencies]
+openai = ["openai>=1.0"]
+test   = ["pytest>=7.0"]
+dev    = ["pytest>=7.0", "ruff>=0.1"]
+
+[tool.setuptools.packages.find]
+include = ["beliefstack*"]
+exclude = ["tests*", "examples*"]
