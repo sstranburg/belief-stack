@@ -14,8 +14,9 @@ env/
 *.key
 
 # Data — withheld by policy (see DATA.md). Only sanitized samples are tracked.
-data/
+**/data/*
 !**/data/sample/
+!**/data/sample/**
 *.npz
 *.parquet
 *.sqlite
