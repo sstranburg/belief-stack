@@ -193,7 +193,7 @@ This is a sharper architecture than v0.3 articulated. It distinguishes *substrat
 
 v0.3's case study claimed the lift was attributable to the spec's `claim + warrant + lifecycle` discipline as a whole. v0.4a.1 falsifies that specific attribution at the projection level. The numbers v0.3 reported are not in question — they replicate cleanly in v0.4a as the B − A delta. The over-strong claim is the *attribution* of those numbers to projection-side discipline rather than to upstream substrate machinery.
 
-The v0.3 essay (`/writing/execution-state-vs-belief-state`) and the spec's empirical-status section need amendments to distinguish these two claims clearly. Memory amendments and site-surface revisions are queued separately.
+The v0.3 essay ([execution-state-vs-belief-state](https://topicspace.ai/writing/execution-state-vs-belief-state)) and the spec's empirical-status section need amendments to distinguish these two claims clearly. Memory amendments and site-surface revisions are queued separately.
 
 ---
 

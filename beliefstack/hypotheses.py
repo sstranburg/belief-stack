@@ -8,9 +8,11 @@ The default generator is `EmpiricalHypothesisGenerator` - it takes the per-regio
 empirical distribution of outcomes from a training window as the prior.
 
 Alternative generators (sequence-conditional, time-decayed, hierarchical,
-calibrated probability outputs, multilabel) are documented in the writing piece
-`/writing/a-pattern-for-evolving-beliefs` and are deliberately out of scope here.
-Implement them by satisfying the same protocol shape.
+calibrated probability outputs, multilabel) are documented in the essay
+"A pattern for evolving beliefs"
+(https://topicspace.ai/writing/a-pattern-for-evolving-beliefs) and are
+deliberately out of scope here. Implement them by satisfying the same protocol
+shape.
 """
 
 from __future__ import annotations

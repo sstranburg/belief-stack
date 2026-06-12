@@ -104,5 +104,6 @@ The multi-pass demo uses lower lifecycle thresholds than the library defaults
   of magnitude more.
 - The `EmpiricalHypothesisGenerator` is the simplest possible L2 predictor.
   Sequence-conditional, time-decayed, hierarchical, and calibrated-probability
-  variants are documented in the parent project's writing piece but not
-  included in this prototype.
+  variants are documented in the essay ["A pattern for evolving
+  beliefs"](https://topicspace.ai/writing/a-pattern-for-evolving-beliefs) but
+  not included in this prototype.
