@@ -83,6 +83,24 @@ cals       = walk_forward_calibrate(events, region_ids, hypotheses, split_at)  #
 
 Run a full demo end-to-end: see [`examples/thesis_radar/`](examples/thesis_radar/) (generic theses) or [`examples/teams_sensemaking/`](examples/teams_sensemaking/) (synthetic Teams chatter). Both produce an HTML report of the beliefs and how they revised over time.
 
+## Observability: what the agent believes, and why
+
+The maintained belief state isn't only an *input* for the planner — it's a *window* for people. This falls out of the design for free, because of an **asymmetry**: the substrate keeps each belief in full (the claim, the evidence/warrant behind it, its lifecycle, its provenance), and only *projects* a sparse view into the planner's context. The rich view is already there — so the same state the agent plans against is also a surface a human can inspect. One source of truth, two projections: **sparse for the planner, rich for the human.**
+
+That turns questions that are normally hard-to-impossible against a raw log into things you can just read off:
+
+| Question about an agent | Against raw history | Against maintained belief state |
+|---|---|---|
+| What does it currently believe? | reconstruct it from scrollback | the active belief set is explicit |
+| *Why* does it believe that? | infer from context | each belief carries its supporting evidence |
+| What changed its mind? | diff thousands of tokens | a lifecycle transition (`contradicted`, `weakened`) |
+| What did it *almost* believe? | gone | retired/contradicted beliefs are kept, not erased |
+| What did it believe last Tuesday? | replay the whole log | replay the belief state at that time |
+
+A raw 2,000-token scrollback can't answer "what do you currently believe, and why?" without paying the reconstruction tax all over again — and it has no contradiction signal at all. A maintained belief layer makes the current state, its justification, and its revision history **first-class and queryable**. The HTML report the examples emit is exactly this human-facing projection: each belief with its narrative, confidence, and the lifecycle transition that produced it.
+
+> **Status — read this honestly.** Inspectability here is a **structural consequence** of the asymmetric-projection design (the substrate preserves warrants and lifecycle while the planner consumes sparse names), reported as a *design-time* property. It is **not** a measured governance outcome — we have not run a study showing it improves human oversight, audit speed, or intervention quality. The architecture *has the structure of* an observability surface; demonstrating governance value is separate, future work.
+
 ## Does it work?
 
 Yes — measured, on a pre-registered sequence of experiments over **164 Claude Code session logs**, **75 paired single-next-action planning questions**, **four LLMs from three providers**. A sparse maintained-state overlay used **~1/10th the input tokens** of raw history *while improving* planning correctness:
