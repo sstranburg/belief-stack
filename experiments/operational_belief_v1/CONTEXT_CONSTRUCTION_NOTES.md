@@ -191,7 +191,7 @@ Per the user's locked rhythm: build, audit, pause. Next step is answer generatio
 ## 11. How to reproduce
 
 ```bash
-cd /Users/sue/Documents/git/storm
+cd /path/to/repo
 source venv/bin/activate
 
 # Substrate (if not already built)

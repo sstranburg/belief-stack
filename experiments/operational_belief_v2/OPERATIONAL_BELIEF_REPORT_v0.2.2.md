@@ -240,7 +240,7 @@ The implication is structural, not a v0.2.2 patch:
 - **AI-facing overlay (`overlay()`)** — what an LLM needs at action time. Compact, ranked, budgeted, optimized for token efficiency and decision-relevance. The B100 result is empirical evidence that this rendering is the load-bearing one for operational-state grounding.
 - **Human-facing surface (`state()` / `timeline()` / `explain()`)** — what an operator needs at debug time. Browsable, time-traveled, evidence-rich, with full provenance. No budget cap. The traceability cost in the B-arm preference results is direct evidence that this surface is needed — not as a dashboard add-on, but as the natural co-equal of the AI overlay.
 
-Both surfaces read from the same belief-state substrate (the dual-consumer framing of the [Belief Stack spec](../topicspace-site/app/research/belief-stack/page.tsx) and demonstrated at fixture level in the [TKOS-002 read-path slice](../tkos_sidecar/TKOS-002_IMPLEMENTATION_NOTE_v0.1.md)). The split is in rendering, not in source of truth.
+Both surfaces read from the same belief-state substrate (the dual-consumer framing of the [Belief Stack spec](https://topicspace.ai/research/belief-stack) and demonstrated at fixture level in the [TKOS-002 read-path slice](../tkos_sidecar/TKOS-002_IMPLEMENTATION_NOTE_v0.1.md)). The split is in rendering, not in source of truth.
 
 v0.2.2 turns "belief observability" from a category claim into a measured design constraint: the AI surface needs compact grounding; the human surface needs evidence-rich traces; one substrate serves both. Compressed serialization for the AI is the right call empirically; preserving evidence somewhere else (on the human surface) is now required to recover the traceability that compression cost.
 

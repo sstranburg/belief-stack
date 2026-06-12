@@ -42,8 +42,8 @@ Every architectural decision carries its reason and its reversibility. Cheap-to-
 
 - **Substance of the work** — [topicspace.ai/research/belief-stack](https://topicspace.ai/research/belief-stack). The Belief Stack spec, with the v0.3 result and the post-v0.3 vocabulary.
 - **Current priorities** — `/ops/backlog.md`.
-- **Examples of the rhythm in action** — any pre-registration (e.g., `belief_stack_v0_3/BELIEF_STACK_PRE_REGISTRATION_v0.3.md`) paired with its report. The discipline is visible in the artifact pair, not just the result.
-- **The AI substrate** (cold-start orientation for Claude / other agents) — [`CLAUDE.md`](../CLAUDE.md) at the storm repo root.
+- **Examples of the rhythm in action** — any pre-registration (e.g., [`experiments/belief_stack_v0_3/BELIEF_STACK_PRE_REGISTRATION_v0.3.md`](../experiments/belief_stack_v0_3/BELIEF_STACK_PRE_REGISTRATION_v0.3.md)) paired with its report. The discipline is visible in the artifact pair, not just the result.
+- **The AI substrate** (cold-start orientation for Claude / other agents) — `CLAUDE.md`, the AI-facing cold-start file kept in the private research repo.
 
 ---
 

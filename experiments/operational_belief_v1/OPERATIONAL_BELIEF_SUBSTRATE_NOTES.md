@@ -268,7 +268,7 @@ For richer reading (timeline of revisions), iterate `revision_trail`. For warran
 ## 11. How to reproduce
 
 ```bash
-cd /Users/sue/Documents/git/storm
+cd /path/to/repo
 source venv/bin/activate
 python operational_belief_v1/build_operational_belief_substrate.py
 ```

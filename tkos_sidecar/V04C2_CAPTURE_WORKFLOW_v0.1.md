@@ -4,8 +4,8 @@
 **Status:** Capture-ready. The TKOS write-path sidecar can ingest, verify, and export Codex rollouts as v0.4c2-grade substrate artifacts.
 **Predecessors:**
 - `TKOS_WRITE_PATH_SCOPE_v0.3.3.md` (the locked sidecar scope)
-- `belief_stack_v0_4c2/V04C2_SUBSTRATE_ADMISSION_CRITERIA.md` (the admission rules this workflow must satisfy)
-- `project_v04c2_substrate_separation.md` (the discipline that gates which sessions are admissible)
+- The v0.4c2 substrate admission criteria (the admission rules this workflow must satisfy) — internal
+- The substrate-separation discipline that gates which sessions are admissible — internal
 
 This document is the operational handbook for capturing the v0.4c2 substrate from a fresh Codex project.
 
@@ -19,7 +19,7 @@ Per the locked admission criteria (§4 hard rule):
 
 The TKOS sidecar exists. Its trace capture mechanism is verified working (956 lines from a real Codex rollout, 17 turns, all five completeness checks passing, byte-deterministic export).
 
-But the sidecar's OWN traces — from the sidecar build sessions Codex ran on Sue's machine 2026-06-05 through 2026-06-08 — are **NOT** v0.4c2 substrate. Those sessions started before this workflow doc existed. They were valuable for testing the capture mechanism; they cannot serve as admissible v0.4c2 data.
+But the sidecar's OWN traces — from the sidecar build sessions during development — are **NOT** v0.4c2 substrate. Those sessions started before this workflow doc existed. They were valuable for testing the capture mechanism; they cannot serve as admissible v0.4c2 data.
 
 The v0.4c2 substrate begins at **session 1 of a new Codex project**. Everything before that is pre-substrate work.
 
@@ -40,10 +40,10 @@ You do not need to rebuild anything. The sidecar is capture-ready.
 
 ## §2 Starting the v0.4c2 substrate project
 
-Per `project_v04c2_substrate_separation.md` (Option A, locked) and `project_v04c2_substrate_plan.md`:
+Per the locked substrate-separation discipline (Option A):
 
-1. Open Codex IDE (the assistant-native environment Sue's been using).
-2. Start a **completely new Codex project** for whatever software work Sue chooses (e.g., a small Belief Stack SDK, a runtime sidecar extension, a CLI utility, a paper-site refresh — see substrate plan §5 for the Belief-Stack-SDK recommendation and trade-offs).
+1. Open your Codex IDE.
+2. Start a **completely new Codex project** for whatever software work you choose.
 3. From session 1, just work normally. Codex will write its rollout JSONL to `~/.codex/sessions/YYYY/MM/DD/rollout-{timestamp}-{uuid}.jsonl` automatically.
 
 The sidecar does NOT need to be running live during the session. The rollout file is the source of truth; capture runs against the closed file post-session.
@@ -55,15 +55,15 @@ The sidecar does NOT need to be running live during the session. The rollout fil
 After a Codex session is closed (the project is paused, the rollout file is no longer being written to):
 
 ```bash
-cd /Users/sue/Documents/git/storm
+cd /path/to/repo
 venv/bin/python tkos_sidecar/tkos.py --db tkos_v04c2.db capture \
-    /Users/sue/.codex/sessions/YYYY/MM/DD/rollout-XXXXXXXX.jsonl
+    ~/.codex/sessions/YYYY/MM/DD/rollout-XXXXXXXX.jsonl
 ```
 
 Output:
 ```
 session_id: <uuid-from-session_meta>
-rollout:    /Users/sue/.codex/sessions/...
+rollout:    ~/.codex/sessions/...
 lines:      <N>
 categories: {'mapped': X, 'ignored-known': Y, 'unrecognized': 0, 'idempotent_replay': 0}
 finalized:  True
@@ -132,7 +132,7 @@ This is the artifact the v0.4c2 backtest (eventually) consumes.
    ready for v0.4c2 backtest
 ```
 
-Iterate per session. Accumulate substrate over the duration of the v0.4c2 project. When the substrate is large enough (per the v0.4c2 admission criteria §3 minimum thresholds — ≥30 sessions / ≥3K turns / ≥40 paired questions / ≥4 of 5 categories), the v0.4c2 backtest can begin.
+Iterate per session. Accumulate substrate over the duration of the v0.4c2 project. When the substrate is large enough (per the v0.4c2 admission-criteria minimum thresholds), the v0.4c2 backtest can begin.
 
 ---
 
@@ -164,7 +164,7 @@ Do NOT silently ignore unrecognized lines or invent rule mappings. The disciplin
 
 - **Live-mode ingestion** (streaming the rollout as Codex writes it). Batch post-session ingestion is sufficient for v0.4c2 substrate purposes. Live mode is v0.4+ work.
 - **Multi-session aggregation queries.** The v0.4c2 backtest would query the substrate per session; cross-session analysis is downstream work.
-- **The v0.4c2 backtest itself.** See `belief_stack_v0_4c2/V04C2_SUBSTRATE_ADMISSION_CRITERIA.md` for admission rules; the actual backtest implementation is future work.
+- **The v0.4c2 backtest itself.** The admission rules live in the internal v0.4c2 substrate admission criteria; the actual backtest implementation is future work.
 
 ---
 

@@ -5,7 +5,7 @@
 
 This directory contains the F-023 log-replay POC infrastructure. It exists to test whether the Belief Stack v0.1 specification, when applied to real Claude session logs, surfaces failure modes (stale priors, missed contradictions, repeated-failure loops, unwarranted interventions) that the assistant itself did not catch at runtime.
 
-The strategic frame, the scope, and the methodology-discipline requirements are documented in the [F-023 backlog card](../BACKLOG.md). This README focuses on what Phase 1 produced and what remains.
+The strategic frame, the scope, and the methodology-discipline requirements are documented in the F-023 backlog card (internal backlog). This README focuses on what Phase 1 produced and what remains.
 
 ---
 

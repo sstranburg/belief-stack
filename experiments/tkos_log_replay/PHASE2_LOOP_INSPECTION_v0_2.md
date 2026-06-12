@@ -68,7 +68,7 @@ Example, session `ed22b861` window `[92..101]`, 5 retries of
 |--:|---|
 | 91 | `venv/bin/python scripts/build_backtest_history.py` |
 | 93 | `venv/bin/python scripts/build_backtest_history.py` |
-| 95 | `/Users/sue/Documents/git/storm/venv/bin/python /Users/sue/Documents/git/storm/scripts/build_backtest_history.py` |
+| 95 | `/path/to/repo/venv/bin/python /path/to/repo/scripts/build_backtest_history.py` |
 | 97 | `source venv/bin/activate && python scripts/build_backtest_history.py` |
 | 99 | `source venv/bin/activate && python scripts/build_backtest_history.py` |
 | 101 | (assistant prose) *"It seems `build_backtest_history.py` is being blocked by your permission settings. Could you approve it…"* |

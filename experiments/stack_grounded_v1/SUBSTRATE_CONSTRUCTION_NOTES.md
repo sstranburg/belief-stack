@@ -226,7 +226,7 @@ The substrate builders themselves do **not** pre-filter by question cutoff. They
 ## 6. How to reproduce
 
 ```bash
-cd /Users/sue/Documents/git/storm
+cd /path/to/repo
 source venv/bin/activate
 python stack_grounded_v1/build_chunk_substrate.py
 python stack_grounded_v1/build_belief_substrate.py
@@ -239,7 +239,7 @@ Both scripts are deterministic. Re-running produces:
 - `stack_grounded_v1/data/belief_objects.jsonl` (2,031 belief objects)
 - `stack_grounded_v1/data/belief_substrate_audit.json`
 
-Inputs that must exist (all already present in the Storm repo):
+Inputs that must exist (all already present in the research repo):
 
 | Path | Used by | Purpose |
 |---|---|---|
@@ -248,7 +248,7 @@ Inputs that must exist (all already present in the Storm repo):
 | `data/derived/expectation_lifecycle_events.parquet` | belief builder | lifecycle states + counterevidence anchors |
 | `data/derived/narrative_pressure.jsonl` | (documented input; not joined in v0.1) | reserved for v0.2 |
 
-The substrate files are gitignored at the repo level (the storm repo's global `data/` ignore rule). Reproduction from scripts + tracked Storm pipeline outputs is the audit path.
+The substrate files are gitignored at the repo level (the research repo's global `data/` ignore rule). Reproduction from scripts + tracked research-pipeline outputs is the audit path.
 
 ---
 

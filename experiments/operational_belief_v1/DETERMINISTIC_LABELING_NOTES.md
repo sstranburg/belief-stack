@@ -157,7 +157,7 @@ The complete per-metric example pools, with quotes, are preserved in the audit J
 ## 12. How to reproduce
 
 ```bash
-cd /Users/sue/Documents/git/storm
+cd /path/to/repo
 source venv/bin/activate
 python operational_belief_v1/deterministic_label.py
 ```

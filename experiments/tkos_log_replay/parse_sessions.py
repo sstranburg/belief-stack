@@ -2,8 +2,8 @@
 """
 F-023 Phase 1: parse Claude session JSONLs into a normalized representation.
 
-Input:  ~/.claude/projects/-Users-sue-Documents-git-storm/ (5 main sessions)
-        ~/.claude/projects/-Users-sue-Documents-git-storm/subagents/ (159 subagent traces)
+Input:  ~/.claude/projects/<project>/ (5 main sessions)
+        ~/.claude/projects/<project>/subagents/ (159 subagent traces)
 
 Output: tkos_log_replay/data/sessions_normalized.jsonl
         tkos_log_replay/data/sessions_inventory.json
@@ -33,7 +33,7 @@ from collections import Counter
 from datetime import datetime
 from typing import Iterable
 
-CLAUDE_PROJECTS = pathlib.Path.home() / ".claude/projects/-Users-sue-Documents-git-storm"
+CLAUDE_PROJECTS = pathlib.Path.home() / ".claude/projects/<project>"
 # Subagent traces live under per-session subdirs:
 # <CLAUDE_PROJECTS>/<session-id>/subagents/*.jsonl
 
@@ -223,8 +223,8 @@ def extract_turn(raw: dict, session_id: str, turn_idx: int) -> Turn | None:
 
 def session_id_for(path: pathlib.Path) -> str:
     """Build a session_id from the path.
-       Main sessions:    -Users-sue-Documents-git-storm/<id>.jsonl
-       Subagent traces:  -Users-sue-Documents-git-storm/<session-id>/subagents/agent-<id>.jsonl
+       Main sessions:    <project>/<id>.jsonl
+       Subagent traces:  <project>/<session-id>/subagents/agent-<id>.jsonl
     """
     parent = path.parent.name
     stem = path.stem

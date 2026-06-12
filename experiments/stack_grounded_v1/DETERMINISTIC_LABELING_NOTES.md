@@ -297,7 +297,7 @@ These are the gotchas the user explicitly flagged. They go into the v0.1 report'
 ## 13. How to reproduce
 
 ```bash
-cd /Users/sue/Documents/git/storm
+cd /path/to/repo
 source venv/bin/activate
 python stack_grounded_v1/deterministic_label.py
 ```

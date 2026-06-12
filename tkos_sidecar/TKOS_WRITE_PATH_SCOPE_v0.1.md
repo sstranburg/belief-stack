@@ -11,8 +11,8 @@
 **Predecessors:**
 - [`TKOS_SIDECAR_SKETCH_v0.1.md`](./TKOS_SIDECAR_SKETCH_v0.1.md) — the architectural sketch from 2026-06-01. This document extends §2.1 (`observe()`) into a concrete write-path build.
 - [`TKOS-002_IMPLEMENTATION_SLICE_v0.1.md`](./TKOS-002_IMPLEMENTATION_SLICE_v0.1.md) — the read-path slice (existing `tkos.py`).
-- [`operational_belief_v1/build_operational_belief_substrate.py`](../operational_belief_v1/build_operational_belief_substrate.py) — the v0.1 rule engine in batch form. The write-path ports these derivations to streaming.
-- [`belief_stack_v0_4c2/V04C2_SUBSTRATE_ADMISSION_CRITERIA.md`](../belief_stack_v0_4c2/V04C2_SUBSTRATE_ADMISSION_CRITERIA.md) — the gates the resulting trace capture must satisfy.
+- [`experiments/operational_belief_v1/build_operational_belief_substrate.py`](../experiments/operational_belief_v1/build_operational_belief_substrate.py) — the v0.1 rule engine in batch form. The write-path ports these derivations to streaming.
+- The v0.4c2 substrate admission criteria (internal) — the gates the resulting trace capture must satisfy.
 
 **v0.1 → v0.1.1 amendment (2026-06-05):** §10 Q2 (Codex transcript location) resolved. The rollout JSONL at `~/.codex/sessions/YYYY/MM/DD/rollout-*.jsonl` is the source. Investigation surfaced that the rollout contains **multiple events per conversational turn**, which forces a schema-level change: event identity becomes `(session_id, turn_idx, event_idx)` instead of `(session_id, turn_idx)`. This amendment threads that change through §4, §5 test 5, §6, §8, §10 Q1, and §10 Q6. No code has been written; this is a pre-implementation re-lock per the build-time-audit discipline.
 
@@ -318,7 +318,7 @@ Expected timeline: 3–4 weeks of focused Codex-assisted work for a competent Py
 ## 12. What this does NOT commit to
 
 - The v0.4c2 pre-registration. That document is written separately once an admissible corpus exists.
-- A v0.2 sidecar roadmap. v0.1 ships first; v0.2 questions are accumulated in `belief_stack_v0_4c2/SIDECAR_V02_BACKLOG.md` (file to be created during the build).
+- A v0.2 sidecar roadmap. v0.1 ships first; v0.2 questions are accumulated in an internal sidecar backlog.
 - LLM-driven belief extraction. Out of scope for v0.1; tracked as a separate research direction.
 - IDE / agent integration beyond Codex. The Codex adapter is sufficient for the substrate goal.
 

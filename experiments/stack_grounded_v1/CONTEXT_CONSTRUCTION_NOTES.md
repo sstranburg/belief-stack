@@ -201,7 +201,7 @@ All engineering parameters (embedding model, token budget, tokenizer, theme cap,
 ## 9. How to reproduce
 
 ```bash
-cd /Users/sue/Documents/git/storm
+cd /path/to/repo
 source venv/bin/activate
 
 # First run embeds the chunk substrate (~$0.14, ~2 min on a fast network)
@@ -227,7 +227,7 @@ Inputs that must already exist:
 - `stack_grounded_v1/data/belief_objects.jsonl` (locked Phase B step 2)
 - `.env` with `OPENAI_API_KEY` (only needed for the one-time embedding pass)
 
-Both context files are gitignored at the repo level (the storm repo's global `data/` ignore). Reproduction from scripts + tracked artifacts is the audit path.
+Both context files are gitignored at the repo level (the research repo's global `data/` ignore). Reproduction from scripts + tracked artifacts is the audit path.
 
 ---
 

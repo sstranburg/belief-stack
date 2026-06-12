@@ -231,7 +231,7 @@ Each lever should be tested in isolation, same as C1. None of these are pre-regi
 ## 10. How to reproduce
 
 ```bash
-cd /Users/sue/Documents/git/storm
+cd /path/to/repo
 source venv/bin/activate
 
 # Build C1 contexts (deterministic from belief_objects + contexts_b)

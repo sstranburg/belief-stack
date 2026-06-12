@@ -197,7 +197,7 @@ These engineering parameters are deliberately deferred — they belong to the ru
 ## 8. How to reproduce
 
 ```bash
-cd /Users/sue/Documents/git/storm
+cd /path/to/repo
 source venv/bin/activate
 
 # Stage 1 — candidate generation (reads ledger only)

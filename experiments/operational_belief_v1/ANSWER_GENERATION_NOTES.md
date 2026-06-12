@@ -192,7 +192,7 @@ Hashes let any reader prove the exact prompt and context that produced an answer
 ## 10. How to reproduce
 
 ```bash
-cd /Users/sue/Documents/git/storm
+cd /path/to/repo
 source venv/bin/activate
 python operational_belief_v1/generate_answers.py
 ```

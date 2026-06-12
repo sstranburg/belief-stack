@@ -5,7 +5,7 @@
 **Predecessors:**
 - [`operational_belief_v1/OPERATIONAL_BELIEF_REPORT_v0.1.md`](../operational_belief_v1/OPERATIONAL_BELIEF_REPORT_v0.1.md) — the empirical evidence that an additive belief overlay reduces workflow-state errors.
 - [`operational_belief_v2/OPERATIONAL_BELIEF_PRE_REGISTRATION_v0.2.md`](../operational_belief_v2/OPERATIONAL_BELIEF_PRE_REGISTRATION_v0.2.md) — the next-step design that drives the *budgeted-overlay* requirement here.
-- [`topicspace-site/app/research/belief-stack/page.tsx`](../topicspace-site/app/research/belief-stack/page.tsx) — the Belief Stack pattern definition.
+- [`topicspace-site/app/research/belief-stack/page.tsx`](https://topicspace.ai/research/belief-stack) — the Belief Stack pattern definition.
 
 ---
 

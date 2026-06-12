@@ -43,8 +43,8 @@ Cross-doc patches in this revision cycle: Fix 4 (K=3 turns) → `RULES_SPEC_v0.3
 - [`TKOS_SIDECAR_SKETCH_v0.1.md`](./TKOS_SIDECAR_SKETCH_v0.1.md) — architectural sketch from 2026-06-01. Still load-bearing for §2 API shape and the design principles.
 - [`TKOS-002_IMPLEMENTATION_SLICE_v0.1.md`](./TKOS-002_IMPLEMENTATION_SLICE_v0.1.md) — the read-path slice (existing `tkos.py`).
 - [`operational_belief_v1/build_operational_belief_substrate.py`](../operational_belief_v1/build_operational_belief_substrate.py) — the v0.1 batch rule engine.
-- [`reference_codex_trace_storage.md`](../../.claude/projects/-Users-sue-Documents-git-storm/memory/reference_codex_trace_storage.md) — Codex rollout JSONL location and structure.
-- [`project_v04c2_substrate_separation.md`](../../.claude/projects/-Users-sue-Documents-git-storm/memory/project_v04c2_substrate_separation.md) — the locked decision separating this software build from v0.4c2 substrate work.
+- ``reference_codex_trace_storage.md`` (internal memory note) — Codex rollout JSONL location and structure.
+- ``project_v04c2_substrate_separation.md`` (internal memory note) — the locked decision separating this software build from v0.4c2 substrate work.
 
 ---
 

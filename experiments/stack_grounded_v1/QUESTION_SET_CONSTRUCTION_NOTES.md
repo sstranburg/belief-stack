@@ -136,7 +136,7 @@ These engineering parameters are deliberately not frozen at question-set lock be
 ## 7. How to reproduce
 
 ```bash
-cd /Users/sue/Documents/git/storm
+cd /path/to/repo
 source venv/bin/activate
 python stack_grounded_v1/build_question_candidates.py
 python stack_grounded_v1/curate_question_set.py

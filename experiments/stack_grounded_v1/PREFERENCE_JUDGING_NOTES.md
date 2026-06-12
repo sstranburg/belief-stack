@@ -253,7 +253,7 @@ These carry the same status as the deterministic-labeling caveats: into the v0.1
 ## 12. How to reproduce
 
 ```bash
-cd /Users/sue/Documents/git/storm
+cd /path/to/repo
 source venv/bin/activate
 python stack_grounded_v1/judge_preference.py
 ```

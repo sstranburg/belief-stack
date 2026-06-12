@@ -162,7 +162,7 @@ For each of `{traceability, appropriate_caution}` and each of `{A_wins, B_wins, 
 ## 11. How to reproduce
 
 ```bash
-cd /Users/sue/Documents/git/storm
+cd /path/to/repo
 source venv/bin/activate
 python operational_belief_v1/judge_preference.py
 ```

@@ -136,7 +136,7 @@ The pre-reg §5.3 fairness constraint is **identical token budget** (both 6000),
 ## 6. How to reproduce
 
 ```bash
-cd /Users/sue/Documents/git/storm
+cd /path/to/repo
 source venv/bin/activate
 python stack_grounded_v1/generate_answers.py
 ```

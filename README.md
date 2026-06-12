@@ -6,6 +6,8 @@
 
 Belief Stack is a **research artifact and reference implementation** for maintained, revisable belief state. Long-running LLM agents pay a *reconstruction tax*: every planning step re-derives the current world model from the same growing pile of interaction history. The cost shows up on three axes at once — input tokens, latency, and planning correctness. Belief Stack maintains belief state explicitly — a substrate of currently-held claims, each with a warrant and a lifecycle — and projects a sparse view of it into the planner's context, so the model reasons against a current view of the world instead of rebuilding one each turn.
 
+> **When this applies — and when it doesn't.** Belief Stack adds value when a system must track revisable hypotheses over time. If all you need is event storage, retrieval, or track reconstruction, a database or temporal graph is usually sufficient.
+
 This repo holds **both the empirical record and a small reference implementation**. New use cases should start in [`examples/`](examples/), not the experiment directories.
 
 ```
