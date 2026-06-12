@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+.Python
+venv/
+.venv/
+env/
+
+# OS
+.DS_Store
+
+# Secrets
+.env
+*.key
+
+# Data — withheld by policy (see DATA.md). Only sanitized samples are tracked.
+data/
+!**/data/sample/
+*.npz
+*.parquet
+*.sqlite
+*.sqlite3
+*.db
+
+# Editor
+.vscode/
+.idea/
