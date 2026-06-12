@@ -95,6 +95,33 @@ Follow-on experiments stress-tested *why*: the lift comes from the **substrate t
 
 ---
 
+## Where else this applies
+
+The planning experiments measure the value of maintained belief state in one substrate. The examples below illustrate the **same belief-lifecycle pattern** in other domains where claims evolve as evidence arrives. The pattern isn't about coding agents — it's about any system that tracks **revisable, evidence-backed claims over time**. Coding-assistant traces are just the substrate where the result is *measured*; the machinery (L0 evidence → L1 grouping → L2 beliefs → L3 lifecycle → L4 calibration) is substrate-agnostic.
+
+A caveat up front, in keeping with the project's discipline: **the measured planning result is on the coding-assistant substrate.** The domains below are where the *pattern* applies. Two are demonstrated in this repo; the rest are candidate mappings, not yet measured. (Cross-substrate replication is the one experiment still owed — see v0.4c2.)
+
+**Market & narrative intelligence** — *demonstrated in [`experiments/sensemaking_v1_5/`](experiments/sensemaking_v1_5/)*
+A maintained read on what the market currently believes about a company, separate from the raw feed.
+- **L0** filings, news, analyst notes, price moves → **L1** narrative clusters per company/theme → **L2** belief: `narrative_repricing :: price is moving faster than the supporting story` → **L3** born → strengthened → contradicted as story and price converge or diverge.
+- *Honest result:* aggregate calibration sits near chance **by design of the success criterion**, with measurable regional heterogeneity — a different methodology and bar than the operational line, not a planning-correctness claim. See its README.
+
+**Organizational sensemaking** — *runnable in [`examples/teams_sensemaking/`](examples/teams_sensemaking/)*
+A maintained read on what's actually going on across a team's chatter, instead of re-reading every thread.
+- **L0** chat / meeting / ticket messages → **L1** theme clusters (vendor renewal, staffing pressure, compliance findings…) → **L2** belief: `customer_escalation :: this account's issue is escalating` (state: escalated / resolved / stalled) → **L3** escalating → resolved → reopened.
+
+**Temporal knowledge graphs** — *mapping in [`docs/belief_stack_fit_assessment_kg.md`](docs/belief_stack_fit_assessment_kg.md)*
+A layer of *what the graph currently implies*, sitting above the stored facts.
+- **L0** ingestion events, documents, tool outputs → **L1** the graph itself (entities, relations, timestamps) → **L2** belief: `supplier_relationship :: X currently supplies Y` / `role_change :: this entity's role is shifting` / a relation flagged `contradicted` by recent evidence → **L3** relation lifecycle → **L4** did the belief layer improve retrieval / ranking / downstream reasoning vs querying the raw graph. *(If consumers only need stored facts, the graph alone is enough — this layer earns its keep only when the implications are revisable.)*
+
+**Monitoring & incident response** — *candidate*
+A maintained read on current system health, instead of re-scanning alert history each time.
+- **L0** alerts, metrics, deploy events → **L1** cluster by service / incident → **L2** belief: `service_degraded :: checkout latency is climbing` → **L3** degraded → recovering → recovered → recurred → **L4** did the belief track the real outage.
+
+The common thread — and the disqualifier from above — is the same: these are domains where claims **change as evidence arrives** and the current view is worth maintaining. If a domain only needs to store and retrieve facts, it doesn't need this.
+
+---
+
 ## Where to go next
 
 | If you want… | Go to |
